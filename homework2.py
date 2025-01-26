@@ -7,10 +7,38 @@ def histogram(input_dictionary: dict) -> list:
     # data is a list
 
     # Write your code here
+    data = input_dictionary['data']
+    n = input_dictionary['n']
+    min_val = input_dictionary['min_val']
+    max_val = input_dictionary['min_val']
+
+    if n <= 0:
+        return []
+
+    if min_val == max_val:
+        print("Error: min_val and max_val are the same value")
+        return []
+    elif min_val > max_val:
+        temp = min_val
+        min_val = max_val
+        max_val = temp
+    
+    hist = [0] * n
+
+    w = (max_val-min_val)/n
+    hist[0] = (min_val, min_val + w)
+    for count in hist:
+        hist[count] = [min_val + w, min_val + 2*w]
+
+    for dataPoints in data:
+        for i in hist:
+            if dataPoints>=min_val + i*w and dataPoints<min_val + (i+1)*w: 
+                hist[i] + 1
+    
+    return hist
 
     # return the variable storing the histogram
     # Output should be a list
-    pass
 
 # Here, the function first checks if the lower and upper bounds are the same, 
 # if they are it prints an error message and returns an empty list. 
